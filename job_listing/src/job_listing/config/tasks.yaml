@@ -1,0 +1,29 @@
+job_search_task:
+ description: >
+   Retrieve and compile a list of current job listings related to {topic}.
+   Focus on finding diverse opportunities across different companies, seniority levels,
+   and locations. For each job, capture the job title, company name, and direct link
+   to the listing.
+ expected_output: >
+   A structured list of at least 8 job opportunities, each containing the job title,
+   company name, location, and a direct link to apply. Include jobs posted within
+   the last {recency_days} days where possible.
+ agent: job_scout
+ output_file: job_listings.md
+
+job_analysis_task:
+ description: >
+   Analyze each job listing in detail, focusing on key aspects such as required
+   skills, experience level, compensation details (if available), company culture,
+   growth opportunities, and potential red flags. Compare these positions to current
+   industry standards.
+ expected_output: >
+   A concise summary for each job listing that includes:
+   - Overview of the position (1-2 sentences)
+   - Key required skills and qualifications
+   - Potential advantages of the role
+   - Potential concerns or limitations
+   - Overall evaluation (suitable for entry/mid/senior level candidates)
+   Formatted as markdown without '```'
+ agent: job_analyzer
+ output_file: job_analysis.md
