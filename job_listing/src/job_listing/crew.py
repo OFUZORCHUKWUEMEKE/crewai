@@ -1,5 +1,6 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from crewai_tools import SerperDevTool,ScrapeWebsiteTool
 
 # If you want to run a snippet of code before or after the crew starts, 
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -18,32 +19,34 @@ class JobListing():
 	# If you would like to add tools to your agents, you can learn more about it here:
 	# https://docs.crewai.com/concepts/agents#agent-tools
 	@agent
-	def researcher(self) -> Agent:
+	def job_scout(self) -> Agent:
 		return Agent(
-			config=self.agents_config['researcher'],
-			verbose=True
+			config=self.agents_config['job_scout'],
+			verbose=True,
+			tools=[SerperDevTool()]
 		)
 
 	@agent
-	def reporting_analyst(self) -> Agent:
+	def job_analyzer(self) -> Agent:
 		return Agent(
-			config=self.agents_config['reporting_analyst'],
-			verbose=True
+			config=self.agents_config['job_analyzer'],
+			verbose=True,
+			tools=[ScrapeWebsiteTool()]
 		)
 
 	# To learn more about structured task outputs, 
 	# task dependencies, and task callbacks, check out the documentation:
 	# https://docs.crewai.com/concepts/tasks#overview-of-a-task
 	@task
-	def research_task(self) -> Task:
+	def job_search_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['research_task'],
+			config=self.tasks_config['job_search_task'],
 		)
 
 	@task
-	def reporting_task(self) -> Task:
+	def job_analysis_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['reporting_task'],
+			config=self.tasks_config['job_analysis_task'],
 			output_file='report.md'
 		)
 

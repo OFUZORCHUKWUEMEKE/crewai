@@ -6,8 +6,7 @@ job_search_task:
    to the listing.
  expected_output: >
    A structured list of at least 8 job opportunities, each containing the job title,
-   company name, location, and a direct link to apply. Include jobs posted within
-   the last {recency_days} days where possible.
+   company name, location, and a direct link to apply.
  agent: job_scout
  output_file: job_listings.md
 
